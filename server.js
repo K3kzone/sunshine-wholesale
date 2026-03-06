@@ -8,6 +8,42 @@ require('dotenv').config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+const fs = require('fs');
+
+// Default products (used when data/products.json is missing)
+const DEFAULT_PRODUCTS = [
+  { name: 'Sparkling Orange Soda', code: 'SW-101', category: 'beverages', subcategory: 'sodas', units_per_case: 24, case_price: 18.5 },
+  { name: 'Cola Classic', code: 'SW-102', category: 'beverages', subcategory: 'sodas', units_per_case: 24, case_price: 19 },
+  { name: 'Lemon-Lime Soda', code: 'SW-103', category: 'beverages', subcategory: 'sodas', units_per_case: 24, case_price: 18 },
+  { name: 'Orange Juice', code: 'SW-111', category: 'beverages', subcategory: 'juices', units_per_case: 12, case_price: 24 },
+  { name: 'Apple Juice', code: 'SW-112', category: 'beverages', subcategory: 'juices', units_per_case: 12, case_price: 22 },
+  { name: 'Iced Tea Mix', code: 'SW-118', category: 'beverages', subcategory: 'tea-coffee', units_per_case: 6, case_price: 21.9 },
+  { name: 'Coffee Pods', code: 'SW-119', category: 'beverages', subcategory: 'tea-coffee', units_per_case: 24, case_price: 28 },
+  { name: 'Classic Potato Chips', code: 'SW-205', category: 'snacks', subcategory: 'chips', units_per_case: 48, case_price: 32 },
+  { name: 'Corn Chips', code: 'SW-206', category: 'snacks', subcategory: 'chips', units_per_case: 36, case_price: 27 },
+  { name: 'Mixed Nuts', code: 'SW-211', category: 'snacks', subcategory: 'nuts', units_per_case: 24, case_price: 36 },
+  { name: 'Peanuts', code: 'SW-212', category: 'snacks', subcategory: 'nuts', units_per_case: 24, case_price: 20 },
+  { name: 'Gummy Bears', code: 'SW-221', category: 'snacks', subcategory: 'candy', units_per_case: 24, case_price: 18 },
+  { name: 'Chocolate Bars', code: 'SW-222', category: 'snacks', subcategory: 'candy', units_per_case: 36, case_price: 28 },
+  { name: 'Lemon Dish Soap', code: 'SW-310', category: 'household', subcategory: 'cleaning', units_per_case: 12, case_price: 27.5 },
+  { name: 'All-Purpose Cleaner', code: 'SW-311', category: 'household', subcategory: 'cleaning', units_per_case: 12, case_price: 22 },
+  { name: 'Paper Towels', code: 'SW-320', category: 'household', subcategory: 'paper', units_per_case: 8, case_price: 24 },
+  { name: 'Napkins', code: 'SW-321', category: 'household', subcategory: 'paper', units_per_case: 12, case_price: 15 },
+];
+
+function getProducts() {
+  const dataPath = path.join(__dirname, 'data', 'products.json');
+  try {
+    if (fs.existsSync(dataPath)) {
+      const raw = fs.readFileSync(dataPath, 'utf8');
+      const data = JSON.parse(raw);
+      return Array.isArray(data) ? data : DEFAULT_PRODUCTS;
+    }
+  } catch (e) {
+    console.warn('Could not read data/products.json, using defaults:', e.message);
+  }
+  return DEFAULT_PRODUCTS;
+}
 
 // Simple admin user (optional, via env)
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
@@ -83,6 +119,10 @@ function requireAuth(req, res, next) {
   }
   return res.redirect('/login.html');
 }
+
+app.get('/api/products', (req, res) => {
+  res.json(getProducts());
+});
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;

@@ -15,10 +15,25 @@
           <a href="/catalog.html" class="nav-link">Products</a>
           <a href="#about" class="nav-link">About</a>
           <a href="#contact" class="nav-link">Contact</a>
+          <a href="/catalog.html" class="header-cart__btn" id="header-cart-btn-home" aria-label="Cart">
+            <svg class="header-cart__icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span class="header-cart__badge" id="header-cart-count-home">0</span>
+          </a>
           <a href="/login.html" class="nav-link nav-link--cta">Wholesale Login</a>
         </nav>
       </div>
     </header>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('sunshine_cart');
+          var cart = raw ? JSON.parse(raw) : [];
+          var total = cart.reduce(function (n, i) { return n + (i.quantity || 0); }, 0);
+          var el = document.getElementById('header-cart-count-home');
+          if (el) el.textContent = total;
+        } catch (e) {}
+      })();
+    </script>
 
     <main>
       <section class="hero-banner">

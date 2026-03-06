@@ -14,291 +14,282 @@
           <a href="/">Home</a>
           <a href="/catalog.html">Catalog</a>
           <a href="/login.html" class="button button-outline">Wholesale Login</a>
+          <div class="header-cart" id="header-cart">
+            <button type="button" class="header-cart__btn" id="header-cart-btn" aria-expanded="false" aria-haspopup="true" aria-label="Cart">
+              <svg class="header-cart__icon" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+              <span class="header-cart__badge" id="header-cart-count">0</span>
+            </button>
+            <div class="header-cart__dropdown" id="header-cart-dropdown" role="dialog" aria-label="Cart">
+              <div class="header-cart__dropdown-title">Your cart</div>
+              <ul class="header-cart__dropdown-list" id="header-cart-list"></ul>
+              <div class="header-cart__dropdown-empty" id="header-cart-empty">No items yet.</div>
+              <div class="header-cart__dropdown-footer" id="header-cart-footer" hidden>
+                <a href="/login.html" class="header-cart__purchase" id="header-cart-purchase">Purchase</a>
+              </div>
+            </div>
+          </div>
         </nav>
       </div>
     </header>
 
-    <main class="section">
-      <div class="container">
-        <h1>Wholesale Catalog</h1>
-        <p>
-          Browse Sunshine Wholesale products and pricing. To place an order request, please log in to your
-          wholesale account.
-        </p>
-
-        <p style="margin-top: 0.75rem; font-size: 0.9rem;">
-          Already a customer?
-          <a href="/login.html" class="text-link">Log in to send your order.</a>
-        </p>
-
-        <div class="catalog-toolbar">
-          <input
-            id="product-search"
-            type="text"
-            placeholder="Search products by name or code..."
-            aria-label="Search products"
-          />
-          <select id="category-filter" aria-label="Filter by category">
-            <option value="">All categories</option>
-            <option value="beverages">Beverages</option>
-            <option value="snacks">Snacks</option>
-            <option value="household">Household</option>
-          </select>
-          <select id="subcategory-filter" aria-label="Filter by subcategory">
-            <option value="">All subcategories</option>
-          </select>
+    <main class="section purchasing-page">
+      <div class="section-inner container">
+        <div class="purchasing-layout">
+          <aside class="filters-sidebar" id="filters-sidebar" aria-label="Filters">
+            <h2 class="filters-sidebar__title">Filters</h2>
+            <div class="filter-section" id="filter-department">
+              <button type="button" class="filter-section__header" aria-expanded="true" aria-controls="department-list" id="department-toggle">
+                <span class="filter-section__icon" aria-hidden="true">▣</span>
+                <span>Department</span>
+                <span id="department-count">(0)</span>
+              </button>
+              <ul class="filter-section__list" id="department-list" role="group">
+                <li><label><input type="radio" name="department" value="" checked /> All Departments</label></li>
+              </ul>
+            </div>
+            <div class="filter-section" id="filter-category">
+              <button type="button" class="filter-section__header" aria-expanded="true" aria-controls="category-list" id="category-toggle">
+                <span class="filter-section__icon" aria-hidden="true">◉</span>
+                <span>Category</span>
+                <span id="category-count">(0)</span>
+              </button>
+              <ul class="filter-section__list" id="category-list" role="group">
+                <li><label><input type="radio" name="category" value="" checked /> All Categories</label></li>
+              </ul>
+            </div>
+          </aside>
+          <div class="products-main">
+            <div class="products-main__header">
+              <h1 class="products-main__title">Products</h1>
+              <span class="products-main__count" id="products-count">(0 Found)</span>
+            </div>
+            <div class="products-toolbar">
+              <input type="search" id="product-search" class="products-toolbar__search" placeholder="Search by product name or code..." aria-label="Search products" />
+              <div class="sort-buttons">
+                <button type="button" class="sort-btn active" data-sort="name" aria-pressed="true">Name</button>
+                <button type="button" class="sort-btn" data-sort="code" aria-pressed="false">Code</button>
+              </div>
+            </div>
+            <div id="product-grid" class="product-grid">
+              <p id="products-loading" class="products-loading">Loading products…</p>
+            </div>
+          </div>
         </div>
-
-        <div id="product-grid" class="product-grid">
-          <!-- Beverages > Sodas -->
-          <article class="product-card" data-name="Sparkling Orange Soda" data-code="SW-101" data-category="beverages" data-subcategory="sodas" data-units-per-case="24" data-case-price="18.50">
-            <img src="https://picsum.photos/seed/SW101/400/400" alt="Sparkling Orange Soda" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-101</span>
-              <span class="product-chip">Beverages</span>
-              <span class="product-chip product-chip-sub">Sodas</span>
-            </div>
-            <h3>Sparkling Orange Soda</h3>
-            <p>24 x 330ml cans · Sunshine brand</p>
-            <p class="product-price">Case $18.50 · $0.77/unit</p>
-          </article>
-          <article class="product-card" data-name="Cola Classic" data-code="SW-102" data-category="beverages" data-subcategory="sodas" data-units-per-case="24" data-case-price="19.00">
-            <img src="https://picsum.photos/seed/SW102/400/400" alt="Cola Classic" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-102</span>
-              <span class="product-chip">Beverages</span>
-              <span class="product-chip product-chip-sub">Sodas</span>
-            </div>
-            <h3>Cola Classic</h3>
-            <p>24 x 330ml cans</p>
-            <p class="product-price">Case $19.00 · $0.79/unit</p>
-          </article>
-          <article class="product-card" data-name="Lemon-Lime Soda" data-code="SW-103" data-category="beverages" data-subcategory="sodas" data-units-per-case="24" data-case-price="18.00">
-            <img src="https://picsum.photos/seed/SW103/400/400" alt="Lemon-Lime Soda" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-103</span>
-              <span class="product-chip">Beverages</span>
-              <span class="product-chip product-chip-sub">Sodas</span>
-            </div>
-            <h3>Lemon-Lime Soda</h3>
-            <p>24 x 330ml cans</p>
-            <p class="product-price">Case $18.00 · $0.75/unit</p>
-          </article>
-          <!-- Beverages > Juices -->
-          <article class="product-card" data-name="Orange Juice" data-code="SW-111" data-category="beverages" data-subcategory="juices" data-units-per-case="12" data-case-price="24.00">
-            <img src="https://picsum.photos/seed/SW111/400/400" alt="Orange Juice" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-111</span>
-              <span class="product-chip">Beverages</span>
-              <span class="product-chip product-chip-sub">Juices</span>
-            </div>
-            <h3>Orange Juice</h3>
-            <p>12 x 1L cartons</p>
-            <p class="product-price">Case $24.00 · $2.00/unit</p>
-          </article>
-          <article class="product-card" data-name="Apple Juice" data-code="SW-112" data-category="beverages" data-subcategory="juices" data-units-per-case="12" data-case-price="22.00">
-            <img src="https://picsum.photos/seed/SW112/400/400" alt="Apple Juice" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-112</span>
-              <span class="product-chip">Beverages</span>
-              <span class="product-chip product-chip-sub">Juices</span>
-            </div>
-            <h3>Apple Juice</h3>
-            <p>12 x 1L cartons</p>
-            <p class="product-price">Case $22.00 · $1.83/unit</p>
-          </article>
-          <!-- Beverages > Tea & Coffee -->
-          <article class="product-card" data-name="Iced Tea Mix" data-code="SW-118" data-category="beverages" data-subcategory="tea-coffee" data-units-per-case="6" data-case-price="21.90">
-            <img src="https://picsum.photos/seed/SW118/400/400" alt="Iced Tea Mix" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-118</span>
-              <span class="product-chip">Beverages</span>
-              <span class="product-chip product-chip-sub">Tea & Coffee</span>
-            </div>
-            <h3>Iced Tea Mix</h3>
-            <p>6 x 1kg tubs · Lemon flavor</p>
-            <p class="product-price">Case $21.90 · $3.65/unit</p>
-          </article>
-          <article class="product-card" data-name="Coffee Pods" data-code="SW-119" data-category="beverages" data-subcategory="tea-coffee" data-units-per-case="24" data-case-price="28.00">
-            <img src="https://picsum.photos/seed/SW119/400/400" alt="Coffee Pods" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-119</span>
-              <span class="product-chip">Beverages</span>
-              <span class="product-chip product-chip-sub">Tea & Coffee</span>
-            </div>
-            <h3>Coffee Pods</h3>
-            <p>24 pods · Medium roast</p>
-            <p class="product-price">Case $28.00 · $1.17/unit</p>
-          </article>
-          <!-- Snacks > Chips -->
-          <article class="product-card" data-name="Classic Potato Chips" data-code="SW-205" data-category="snacks" data-subcategory="chips" data-units-per-case="48" data-case-price="32.00">
-            <img src="https://picsum.photos/seed/SW205/400/400" alt="Classic Potato Chips" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-205</span>
-              <span class="product-chip">Snacks</span>
-              <span class="product-chip product-chip-sub">Chips</span>
-            </div>
-            <h3>Classic Potato Chips</h3>
-            <p>48 x 50g bags · Sea salted</p>
-            <p class="product-price">Case $32.00 · $0.67/unit</p>
-          </article>
-          <article class="product-card" data-name="Corn Chips" data-code="SW-206" data-category="snacks" data-subcategory="chips" data-units-per-case="36" data-case-price="27.00">
-            <img src="https://picsum.photos/seed/SW206/400/400" alt="Corn Chips" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-206</span>
-              <span class="product-chip">Snacks</span>
-              <span class="product-chip product-chip-sub">Chips</span>
-            </div>
-            <h3>Corn Chips</h3>
-            <p>36 x 50g bags · Nacho</p>
-            <p class="product-price">Case $27.00 · $0.75/unit</p>
-          </article>
-          <!-- Snacks > Nuts -->
-          <article class="product-card" data-name="Mixed Nuts" data-code="SW-211" data-category="snacks" data-subcategory="nuts" data-units-per-case="24" data-case-price="36.00">
-            <img src="https://picsum.photos/seed/SW211/400/400" alt="Mixed Nuts" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-211</span>
-              <span class="product-chip">Snacks</span>
-              <span class="product-chip product-chip-sub">Nuts</span>
-            </div>
-            <h3>Mixed Nuts</h3>
-            <p>24 x 100g bags · Salted</p>
-            <p class="product-price">Case $36.00 · $1.50/unit</p>
-          </article>
-          <article class="product-card" data-name="Peanuts" data-code="SW-212" data-category="snacks" data-subcategory="nuts" data-units-per-case="24" data-case-price="20.00">
-            <img src="https://picsum.photos/seed/SW212/400/400" alt="Peanuts" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-212</span>
-              <span class="product-chip">Snacks</span>
-              <span class="product-chip product-chip-sub">Nuts</span>
-            </div>
-            <h3>Peanuts</h3>
-            <p>24 x 100g bags · Roasted</p>
-            <p class="product-price">Case $20.00 · $0.83/unit</p>
-          </article>
-          <!-- Snacks > Candy -->
-          <article class="product-card" data-name="Gummy Bears" data-code="SW-221" data-category="snacks" data-subcategory="candy" data-units-per-case="24" data-case-price="18.00">
-            <img src="https://picsum.photos/seed/SW221/400/400" alt="Gummy Bears" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-221</span>
-              <span class="product-chip">Snacks</span>
-              <span class="product-chip product-chip-sub">Candy</span>
-            </div>
-            <h3>Gummy Bears</h3>
-            <p>24 x 85g bags</p>
-            <p class="product-price">Case $18.00 · $0.75/unit</p>
-          </article>
-          <article class="product-card" data-name="Chocolate Bars" data-code="SW-222" data-category="snacks" data-subcategory="candy" data-units-per-case="36" data-case-price="28.00">
-            <img src="https://picsum.photos/seed/SW222/400/400" alt="Chocolate Bars" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-222</span>
-              <span class="product-chip">Snacks</span>
-              <span class="product-chip product-chip-sub">Candy</span>
-            </div>
-            <h3>Chocolate Bars</h3>
-            <p>36 x 45g · Milk chocolate</p>
-            <p class="product-price">Case $28.00 · $0.78/unit</p>
-          </article>
-          <!-- Household > Cleaning -->
-          <article class="product-card" data-name="Lemon Dish Soap" data-code="SW-310" data-category="household" data-subcategory="cleaning" data-units-per-case="12" data-case-price="27.50">
-            <img src="https://picsum.photos/seed/SW310/400/400" alt="Lemon Dish Soap" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-310</span>
-              <span class="product-chip">Household</span>
-              <span class="product-chip product-chip-sub">Cleaning</span>
-            </div>
-            <h3>Lemon Dish Soap</h3>
-            <p>12 x 750ml bottles · Concentrated</p>
-            <p class="product-price">Case $27.50 · $2.29/unit</p>
-          </article>
-          <article class="product-card" data-name="All-Purpose Cleaner" data-code="SW-311" data-category="household" data-subcategory="cleaning" data-units-per-case="12" data-case-price="22.00">
-            <img src="https://picsum.photos/seed/SW311/400/400" alt="All-Purpose Cleaner" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-311</span>
-              <span class="product-chip">Household</span>
-              <span class="product-chip product-chip-sub">Cleaning</span>
-            </div>
-            <h3>All-Purpose Cleaner</h3>
-            <p>12 x 500ml spray bottles</p>
-            <p class="product-price">Case $22.00 · $1.83/unit</p>
-          </article>
-          <!-- Household > Paper -->
-          <article class="product-card" data-name="Paper Towels" data-code="SW-320" data-category="household" data-subcategory="paper" data-units-per-case="8" data-case-price="24.00">
-            <img src="https://picsum.photos/seed/SW320/400/400" alt="Paper Towels" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-320</span>
-              <span class="product-chip">Household</span>
-              <span class="product-chip product-chip-sub">Paper</span>
-            </div>
-            <h3>Paper Towels</h3>
-            <p>8 rolls · 2-ply</p>
-            <p class="product-price">Case $24.00 · $3.00/unit</p>
-          </article>
-          <article class="product-card" data-name="Napkins" data-code="SW-321" data-category="household" data-subcategory="paper" data-units-per-case="12" data-case-price="15.00">
-            <img src="https://picsum.photos/seed/SW321/400/400" alt="Napkins" class="product-card__img" loading="lazy" />
-            <div class="product-header">
-              <span class="product-code">SW-321</span>
-              <span class="product-chip">Household</span>
-              <span class="product-chip product-chip-sub">Paper</span>
-            </div>
-            <h3>Napkins</h3>
-            <p>12 x 250 count</p>
-            <p class="product-price">Case $15.00 · $1.25/unit</p>
-          </article>
-        </div>
+        <p style="margin: 1rem 1.75rem 0; font-size: 0.9rem;">
+          Already a customer? <a href="/login.html" class="text-link">Log in to send your order.</a>
+        </p>
       </div>
     </main>
 
     <script>
       const searchInput = document.getElementById('product-search');
-      const categorySelect = document.getElementById('category-filter');
-      const subcategorySelect = document.getElementById('subcategory-filter');
-      const cards = Array.from(document.querySelectorAll('.product-card'));
+      const gridEl = document.getElementById('product-grid');
+      const loadingEl = document.getElementById('products-loading');
+      const countEl = document.getElementById('products-count');
+      const departmentList = document.getElementById('department-list');
+      const categoryList = document.getElementById('category-list');
+      const departmentCountEl = document.getElementById('department-count');
+      const categoryCountEl = document.getElementById('category-count');
 
-      const subcategoriesByCategory = {
-        beverages: ['sodas', 'juices', 'tea-coffee'],
-        snacks: ['chips', 'nuts', 'candy'],
-        household: ['cleaning', 'paper'],
-      };
-      const subcategoryLabels = { sodas: 'Sodas', juices: 'Juices', 'tea-coffee': 'Tea & Coffee', chips: 'Chips', nuts: 'Nuts', candy: 'Candy', cleaning: 'Cleaning', paper: 'Paper' };
+      let allProducts = [];
+      let subcategoriesByCategory = {};
+      let subcategoryLabels = {};
+      let sortBy = 'name';
 
-      function updateSubcategoryFilter() {
-        const main = categorySelect.value;
-        subcategorySelect.innerHTML = '<option value="">All subcategories</option>';
-        if (main && subcategoriesByCategory[main]) {
-          subcategoriesByCategory[main].forEach((sub) => {
-            const opt = document.createElement('option');
-            opt.value = sub;
-            opt.textContent = subcategoryLabels[sub];
-            subcategorySelect.appendChild(opt);
-          });
-        }
-        filterProducts();
+      function labelFromKey(key) {
+        return (key || '').replace(/-/g, ' & ').replace(/\b\w/g, (c) => c.toUpperCase());
       }
 
-      function filterProducts() {
-        const query = searchInput.value.toLowerCase();
-        const category = categorySelect.value;
-        const subcategory = subcategorySelect.value;
-
-        cards.forEach((card) => {
-          const name = card.dataset.name.toLowerCase();
-          const code = card.dataset.code.toLowerCase();
-          const cardCategory = card.dataset.category;
-          const cardSub = card.dataset.subcategory || '';
-
-          const matchesText = !query || name.includes(query) || code.includes(query);
-          const matchesCategory = !category || cardCategory === category;
-          const matchesSub = !subcategory || cardSub === subcategory;
-
-          card.style.display = matchesText && matchesCategory && matchesSub ? '' : 'none';
+      function buildSidebarFilters(products) {
+        const byCat = {};
+        products.forEach((p) => {
+          const c = (p.category || '').toLowerCase().replace(/\s+/g, '-');
+          const s = (p.subcategory || '').toLowerCase().replace(/\s+/g, '-');
+          if (!c) return;
+          if (!byCat[c]) byCat[c] = new Set();
+          if (s) byCat[c].add(s);
+          subcategoryLabels[s] = labelFromKey(s);
+        });
+        subcategoriesByCategory = Object.fromEntries(
+          Object.entries(byCat).map(([k, set]) => [k, Array.from(set)])
+        );
+        const depts = Object.keys(subcategoriesByCategory).sort();
+        const subs = [...new Set(Object.values(subcategoriesByCategory).flat())].sort();
+        departmentCountEl.textContent = '(' + (depts.length + 1) + ')';
+        categoryCountEl.textContent = '(' + (subs.length + 1) + ')';
+        depts.forEach((c) => {
+          const li = document.createElement('li');
+          li.innerHTML = '<label><input type="radio" name="department" value="' + escapeAttr(c) + '" /> ' + escapeHtml(labelFromKey(c)) + '</label>';
+          departmentList.appendChild(li);
+        });
+        subs.forEach((s) => {
+          const li = document.createElement('li');
+          li.innerHTML = '<label><input type="radio" name="category" value="' + escapeAttr(s) + '" /> ' + escapeHtml(subcategoryLabels[s] || s) + '</label>';
+          categoryList.appendChild(li);
         });
       }
 
-      categorySelect.addEventListener('change', updateSubcategoryFilter);
-      subcategorySelect.addEventListener('change', filterProducts);
-      searchInput.addEventListener('input', filterProducts);
-      updateSubcategoryFilter();
+      function getSelectedDepartment() {
+        const r = document.querySelector('input[name="department"]:checked');
+        return r ? r.value : '';
+      }
+      function getSelectedCategory() {
+        const r = document.querySelector('input[name="category"]:checked');
+        return r ? r.value : '';
+      }
+
+      function filterAndSortProducts() {
+        const query = searchInput.value.toLowerCase();
+        const department = getSelectedDepartment();
+        const category = getSelectedCategory();
+        let list = allProducts.filter((p) => {
+          const c = (p.category || '').toLowerCase().replace(/\s+/g, '-');
+          const s = (p.subcategory || '').toLowerCase().replace(/\s+/g, '-');
+          const matchText = !query || (p.name || '').toLowerCase().includes(query) || (p.code || '').toLowerCase().includes(query);
+          const matchDept = !department || c === department;
+          const matchCat = !category || s === category;
+          return matchText && matchDept && matchCat;
+        });
+        list.sort((a, b) => {
+          if (sortBy === 'code') return String(a.code || '').localeCompare(b.code || '');
+          return String(a.name || '').localeCompare(b.name || '');
+        });
+        return list;
+      }
+
+      function renderProductCard(p, withAddButton) {
+        const u = Number(p.units_per_case) || 1;
+        const casePrice = Number(p.case_price) || 0;
+        const unitPrice = u > 0 ? casePrice / u : 0;
+        const imgUrl = p.image_url || 'https://picsum.photos/seed/' + (p.code || '').replace(/-/g, '') + '/300/300';
+        const meta = 'Item # ' + escapeHtml(p.code) + ' | ' + u + ' unit' + (u !== 1 ? 's' : '') + ' per case';
+        const btn = withAddButton
+          ? '<button type="button" class="product-card__add add-to-cart">Add to Cart</button>'
+          : '';
+        return (
+          '<article class="product-card" data-name="' + escapeAttr(p.name) + '" data-code="' + escapeAttr(p.code) + '" data-category="' + escapeAttr(p.category) + '" data-subcategory="' + escapeAttr(p.subcategory) + '" data-units-per-case="' + escapeAttr(String(u)) + '" data-case-price="' + escapeAttr(String(casePrice)) + '">' +
+          '<img src="' + escapeAttr(imgUrl) + '" alt="' + escapeAttr(p.name) + '" class="product-card__img" loading="lazy" />' +
+          '<div class="product-card__body">' +
+          '<h3>' + escapeHtml(p.name) + '</h3>' +
+          '<p class="product-badge">In stock</p>' +
+          '<p class="product-meta">' + meta + '</p>' +
+          '<p class="product-price">$' + casePrice.toFixed(2) + ' (Case) · $' + unitPrice.toFixed(2) + '/unit</p>' +
+          '</div>' + btn + '</article>'
+        );
+      }
+      function escapeAttr(s) { return String(s || '').replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+      function escapeHtml(s) { return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+      const CART_KEY = 'sunshine_cart';
+      let cart = [];
+
+      function loadCart() {
+        try {
+          const raw = localStorage.getItem(CART_KEY);
+          cart = raw ? JSON.parse(raw) : [];
+        } catch (e) {
+          cart = [];
+        }
+      }
+      function saveCart() {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        renderHeaderCart();
+      }
+      function addToCart(code, name) {
+        const existing = cart.find((i) => i.code === code);
+        if (existing) existing.quantity += 1;
+        else cart.push({ code, name, quantity: 1 });
+        saveCart();
+      }
+      function renderHeaderCart() {
+        const countEl = document.getElementById('header-cart-count');
+        const listEl = document.getElementById('header-cart-list');
+        const emptyEl = document.getElementById('header-cart-empty');
+        const footerEl = document.getElementById('header-cart-footer');
+        const total = cart.reduce((n, i) => n + i.quantity, 0);
+        countEl.textContent = total;
+        if (cart.length === 0) {
+          emptyEl.hidden = false;
+          footerEl.hidden = true;
+          listEl.innerHTML = '';
+        } else {
+          emptyEl.hidden = true;
+          footerEl.hidden = false;
+          listEl.innerHTML = cart.map((i) => '<li class="header-cart__dropdown-item">' + escapeHtml(i.name) + ' &times; ' + i.quantity + '</li>').join('');
+        }
+      }
+      document.getElementById('header-cart-btn').addEventListener('click', function () {
+        const dd = document.getElementById('header-cart-dropdown');
+        const open = dd.classList.toggle('is-open');
+        this.setAttribute('aria-expanded', open);
+      });
+      document.addEventListener('click', function (e) {
+        const cartEl = document.getElementById('header-cart');
+        if (cartEl && !cartEl.contains(e.target)) {
+          document.getElementById('header-cart-dropdown').classList.remove('is-open');
+          document.getElementById('header-cart-btn').setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      function refreshGrid() {
+        const list = filterAndSortProducts();
+        countEl.textContent = '(' + list.length + ' Found)';
+        const existing = gridEl.querySelectorAll('.product-card');
+        existing.forEach((el) => el.remove());
+        gridEl.insertAdjacentHTML('beforeend', list.map((p) => renderProductCard(p, true)).join(''));
+        gridEl.querySelectorAll('.add-to-cart').forEach((btn) => {
+          btn.addEventListener('click', function () {
+            const card = btn.closest('.product-card');
+            if (card) addToCart(card.dataset.code, card.dataset.name);
+          });
+        });
+      }
+
+      document.getElementById('department-toggle').addEventListener('click', function () {
+        const list = document.getElementById('department-list');
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+        list.hidden = expanded;
+      });
+      document.getElementById('category-toggle').addEventListener('click', function () {
+        const list = document.getElementById('category-list');
+        const expanded = this.getAttribute('aria-expanded') === 'true';
+        this.setAttribute('aria-expanded', !expanded);
+        list.hidden = expanded;
+      });
+
+      document.getElementById('filters-sidebar').addEventListener('change', function (e) {
+        if (e.target.matches('input[name="department"], input[name="category"]')) refreshGrid();
+      });
+      searchInput.addEventListener('input', refreshGrid);
+
+      document.querySelectorAll('.sort-buttons .sort-btn').forEach((btn) => {
+        btn.addEventListener('click', function () {
+          sortBy = this.dataset.sort;
+          document.querySelectorAll('.sort-buttons .sort-btn').forEach((b) => b.classList.remove('active'));
+          this.classList.add('active');
+          refreshGrid();
+        });
+      });
+
+      loadCart();
+      renderHeaderCart();
+
+      fetch('/api/products')
+        .then((r) => r.json())
+        .then((products) => {
+          if (!Array.isArray(products) || products.length === 0) {
+            loadingEl.textContent = 'No products available.';
+            return;
+          }
+          allProducts = products;
+          loadingEl.remove();
+          buildSidebarFilters(products);
+          refreshGrid();
+        })
+        .catch(() => {
+          loadingEl.textContent = 'Could not load products. Please refresh the page.';
+        });
     </script>
   </body>
   </html>
