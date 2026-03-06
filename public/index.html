@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sunshine Wholesale</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo">Sunshine Wholesale</div>
+        <nav class="nav">
+          <a href="/catalog.html">Catalog</a>
+          <a href="#about">About</a>
+          <a href="#contact">Contact</a>
+          <a href="/login.html" class="button button-outline">Wholesale Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container hero-inner">
+          <div>
+            <h1>Wholesale Essentials, Trusted Quality.</h1>
+            <p>
+              Short, clear description of what your business offers and why customers trust you.
+            </p>
+            <div class="hero-actions">
+              <a href="/catalog.html" class="button">View Catalog & Order</a>
+              <a href="#contact" class="text-link">Contact Us</a>
+            </div>
+          </div>
+          <div class="hero-card">
+            <h2>Business Highlights</h2>
+            <ul>
+              <li>High quality products</li>
+              <li>Fast, reliable service</li>
+              <li>Local, trusted team</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="services" class="section">
+        <div class="container">
+          <h2>Our Services</h2>
+          <div class="grid">
+            <div class="card">
+              <h3>Service One</h3>
+              <p>Short description of your main service or product line.</p>
+            </div>
+            <div class="card">
+              <h3>Service Two</h3>
+              <p>Short description of another important service you provide.</p>
+            </div>
+            <div class="card">
+              <h3>Service Three</h3>
+              <p>Short description of a third key offering.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="about" class="section section-alt">
+        <div class="container two-column">
+          <div>
+            <h2>About Us</h2>
+            <p>
+              Talk about your story, your mission, and what makes your business different. Keep the text
+              friendly and straightforward.
+            </p>
+          </div>
+          <div>
+            <h3>Why Customers Choose You</h3>
+            <ul class="list-check">
+              <li>Experienced team</li>
+              <li>Consistent quality</li>
+              <li>Great customer support</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="contact" class="section">
+        <div class="container">
+          <h2>Contact</h2>
+          <div class="two-column">
+            <div>
+              <p>Share Sunshine Wholesale’s location, hours, and best way to reach you.</p>
+              <p><strong>Phone:</strong> (000) 000-0000</p>
+              <p><strong>Email:</strong> info@sunshinewholesale.com</p>
+              <p><strong>Address:</strong> 123 Wholesale Avenue, Your City</p>
+            </div>
+            <form class="card contact-form">
+              <h3>Send a Message</h3>
+              <label>
+                Name
+                <input type="text" required />
+              </label>
+              <label>
+                Email
+                <input type="email" required />
+              </label>
+              <label>
+                Message
+                <textarea rows="4" required></textarea>
+              </label>
+              <button type="submit" class="button full-width">Submit</button>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <span>&copy; <span id="year"></span> Sunshine Wholesale. All rights reserved.</span>
+        <a href="/login.html" class="text-link">Wholesale Login</a>
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+  </body>
+  </html>
+

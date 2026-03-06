@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wholesale Orders - Sunshine Wholesale</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo">Sunshine Wholesale Portal</div>
+        <nav class="nav">
+          <a href="/">View Site</a>
+          <a href="/logout" class="button button-outline">Logout</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container catalog-layout">
+        <section class="catalog-main">
+          <h1>Wholesale Catalog & Order</h1>
+          <p>You're logged in. Build an order from the catalog below and send it directly to Sunshine Wholesale.</p>
+
+          <div class="catalog-toolbar">
+            <input
+              id="product-search"
+              type="text"
+              placeholder="Search products by name or code..."
+              aria-label="Search products"
+            />
+            <select id="category-filter" aria-label="Filter by category">
+              <option value="">All categories</option>
+              <option value="beverages">Beverages</option>
+              <option value="snacks">Snacks</option>
+              <option value="household">Household</option>
+            </select>
+          </div>
+
+          <div id="product-grid" class="product-grid">
+            <article
+              class="product-card"
+              data-name="Sparkling Orange Soda"
+              data-code="SW-101"
+              data-category="beverages"
+            >
+              <div class="product-header">
+                <span class="product-code">SW-101</span>
+                <span class="product-chip">Beverages</span>
+              </div>
+              <h3>Sparkling Orange Soda</h3>
+              <p>24 x 330ml cans · Sunshine brand</p>
+              <p class="product-price">Case price: $18.50</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+
+            <article
+              class="product-card"
+              data-name="Classic Potato Chips"
+              data-code="SW-205"
+              data-category="snacks"
+            >
+              <div class="product-header">
+                <span class="product-code">SW-205</span>
+                <span class="product-chip">Snacks</span>
+              </div>
+              <h3>Classic Potato Chips</h3>
+              <p>48 x 50g bags · Sea salted</p>
+              <p class="product-price">Case price: $32.00</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+
+            <article
+              class="product-card"
+              data-name="Lemon Dish Soap"
+              data-code="SW-310"
+              data-category="household"
+            >
+              <div class="product-header">
+                <span class="product-code">SW-310</span>
+                <span class="product-chip">Household</span>
+              </div>
+              <h3>Lemon Dish Soap</h3>
+              <p>12 x 750ml bottles · Concentrated</p>
+              <p class="product-price">Case price: $27.50</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+
+            <article
+              class="product-card"
+              data-name="Iced Tea Mix"
+              data-code="SW-118"
+              data-category="beverages"
+            >
+              <div class="product-header">
+                <span class="product-code">SW-118</span>
+                <span class="product-chip">Beverages</span>
+              </div>
+              <h3>Iced Tea Mix</h3>
+              <p>6 x 1kg tubs · Lemon flavor</p>
+              <p class="product-price">Case price: $21.90</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+          </div>
+        </section>
+
+        <aside class="cart-panel">
+          <h2>Your Order</h2>
+          <p class="cart-hint">Add items from the catalog, then send us your order to prepare.</p>
+
+          <div id="cart-empty" class="cart-empty">No items in your order yet.</div>
+
+          <ul id="cart-items" class="cart-items" hidden></ul>
+
+          <div class="cart-summary">
+            <span>Total items:</span>
+            <span id="cart-total">0</span>
+          </div>
+
+          <form id="checkout-form" class="checkout-form">
+            <h3>Contact details</h3>
+            <label>
+              Your name
+              <input type="text" id="customer-name" required />
+            </label>
+            <label>
+              Business name
+              <input type="text" id="business-name" />
+            </label>
+            <label>
+              Email
+              <input type="email" id="customer-email" required />
+            </label>
+            <label>
+              Phone
+              <input type="tel" id="customer-phone" />
+            </label>
+            <label>
+              Notes (delivery window, special instructions)
+              <textarea id="order-notes" rows="3"></textarea>
+            </label>
+            <button type="submit" class="button full-width">Send order to Sunshine Wholesale</button>
+            <p id="checkout-message" class="checkout-message" hidden></p>
+          </form>
+        </aside>
+      </div>
+    </main>
+
+    <script>
+      const searchInput = document.getElementById('product-search');
+      const categorySelect = document.getElementById('category-filter');
+      const cards = Array.from(document.querySelectorAll('.product-card'));
+      const cartItemsEl = document.getElementById('cart-items');
+      const cartEmptyEl = document.getElementById('cart-empty');
+      const cartTotalEl = document.getElementById('cart-total');
+      const checkoutForm = document.getElementById('checkout-form');
+      const checkoutMessage = document.getElementById('checkout-message');
+
+      const cart = [];
+
+      function filterProducts() {
+        const query = searchInput.value.toLowerCase();
+        const category = categorySelect.value;
+
+        cards.forEach((card) => {
+          const name = card.dataset.name.toLowerCase();
+          const code = card.dataset.code.toLowerCase();
+          const cardCategory = card.dataset.category;
+
+          const matchesText = !query || name.includes(query) || code.includes(query);
+          const matchesCategory = !category || cardCategory === category;
+
+          card.style.display = matchesText && matchesCategory ? '' : 'none';
+        });
+      }
+
+      function renderCart() {
+        if (cart.length === 0) {
+          cartEmptyEl.hidden = false;
+          cartItemsEl.hidden = true;
+          cartItemsEl.innerHTML = '';
+          cartTotalEl.textContent = '0';
+          return;
+        }
+
+        cartEmptyEl.hidden = true;
+        cartItemsEl.hidden = false;
+        cartItemsEl.innerHTML = '';
+
+        let totalCount = 0;
+
+        cart.forEach((item, index) => {
+          totalCount += item.quantity;
+          const li = document.createElement('li');
+          li.className = 'cart-item';
+          li.innerHTML = `
+            <div>
+              <div class="cart-item-main">${item.code} – ${item.name}</div>
+              <div class="cart-item-sub">Qty: 
+                <button type="button" data-index="${index}" data-action="decrease" class="cart-qty-btn">−</button>
+                <span class="cart-qty">${item.quantity}</span>
+                <button type="button" data-index="${index}" data-action="increase" class="cart-qty-btn">+</button>
+              </div>
+            </div>
+            <button type="button" data-index="${index}" data-action="remove" class="cart-remove">Remove</button>
+          `;
+          cartItemsEl.appendChild(li);
+        });
+
+        cartTotalEl.textContent = totalCount.toString();
+      }
+
+      function addToCart(card) {
+        const code = card.dataset.code;
+        const name = card.dataset.name;
+
+        const existing = cart.find((item) => item.code === code);
+        if (existing) {
+          existing.quantity += 1;
+        } else {
+          cart.push({ code, name, quantity: 1 });
+        }
+        renderCart();
+      }
+
+      function handleCartClick(event) {
+        const btn = event.target.closest('button');
+        if (!btn || btn.dataset.index === undefined) return;
+
+        const index = Number(btn.dataset.index);
+        const action = btn.dataset.action;
+        const item = cart[index];
+        if (!item) return;
+
+        if (action === 'increase') {
+          item.quantity += 1;
+        } else if (action === 'decrease') {
+          item.quantity -= 1;
+          if (item.quantity <= 0) {
+            cart.splice(index, 1);
+          }
+        } else if (action === 'remove') {
+          cart.splice(index, 1);
+        }
+
+        renderCart();
+      }
+
+      searchInput.addEventListener('input', filterProducts);
+      categorySelect.addEventListener('change', filterProducts);
+      document.querySelectorAll('.add-to-cart').forEach((btn) => {
+        btn.addEventListener('click', () => addToCart(btn.closest('.product-card')));
+      });
+      cartItemsEl.addEventListener('click', handleCartClick);
+
+      checkoutForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        checkoutMessage.hidden = true;
+        checkoutMessage.textContent = '';
+
+        if (cart.length === 0) {
+          checkoutMessage.hidden = false;
+          checkoutMessage.textContent = 'Please add at least one item to your order.';
+          checkoutMessage.className = 'checkout-message error';
+          return;
+        }
+
+        const payload = {
+          customer: {
+            name: document.getElementById('customer-name').value.trim(),
+            businessName: document.getElementById('business-name').value.trim(),
+            email: document.getElementById('customer-email').value.trim(),
+            phone: document.getElementById('customer-phone').value.trim(),
+          },
+          items: cart.map((item) => ({
+            code: item.code,
+            name: item.name,
+            quantity: item.quantity,
+          })),
+          notes: document.getElementById('order-notes').value.trim(),
+        };
+
+        try {
+          const response = await fetch('/api/order', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+
+          if (response.status === 401) {
+            checkoutMessage.hidden = false;
+            checkoutMessage.textContent =
+              'Your session has expired. Please log in again, then resend your order.';
+            checkoutMessage.className = 'checkout-message error';
+            return;
+          }
+
+          if (!response.ok) {
+            throw new Error('Request failed');
+          }
+
+          checkoutMessage.hidden = false;
+          checkoutMessage.textContent =
+            'Thank you! Your order has been sent to Sunshine Wholesale. We will contact you to confirm.';
+          checkoutMessage.className = 'checkout-message success';
+
+          cart.splice(0, cart.length);
+          renderCart();
+          checkoutForm.reset();
+        } catch (error) {
+          checkoutMessage.hidden = false;
+          checkoutMessage.textContent =
+            'Something went wrong sending your order. Please try again or contact us by phone.';
+          checkoutMessage.className = 'checkout-message error';
+        }
+      });
+
+      renderCart();
+    </script>
+  </body>
+  </html>
+

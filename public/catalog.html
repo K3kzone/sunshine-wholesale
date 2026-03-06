@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Catalog & Order - Sunshine Wholesale</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-inner">
+        <div class="logo">Sunshine Wholesale</div>
+        <nav class="nav">
+          <a href="/">Home</a>
+          <a href="/catalog.html">Catalog</a>
+          <a href="/login.html" class="button button-outline">Wholesale Login</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="section">
+      <div class="container">
+        <h1>Wholesale Catalog</h1>
+        <p>
+          Browse Sunshine Wholesale products and pricing. To place an order request, please log in to your
+          wholesale account.
+        </p>
+
+        <p style="margin-top: 0.75rem; font-size: 0.9rem;">
+          Already a customer?
+          <a href="/login.html" class="text-link">Log in to send your order.</a>
+        </p>
+
+        <div class="catalog-toolbar">
+          <input
+            id="product-search"
+            type="text"
+            placeholder="Search products by name or code..."
+            aria-label="Search products"
+          />
+          <select id="category-filter" aria-label="Filter by category">
+            <option value="">All categories</option>
+            <option value="beverages">Beverages</option>
+            <option value="snacks">Snacks</option>
+            <option value="household">Household</option>
+          </select>
+        </div>
+
+        <div id="product-grid" class="product-grid">
+          <article
+            class="product-card"
+            data-name="Sparkling Orange Soda"
+            data-code="SW-101"
+            data-category="beverages"
+          >
+            <div class="product-header">
+              <span class="product-code">SW-101</span>
+              <span class="product-chip">Beverages</span>
+            </div>
+            <h3>Sparkling Orange Soda</h3>
+            <p>24 x 330ml cans · Sunshine brand</p>
+            <p class="product-price">Case price: $18.50</p>
+          </article>
+
+          <article
+            class="product-card"
+            data-name="Classic Potato Chips"
+            data-code="SW-205"
+            data-category="snacks"
+          >
+            <div class="product-header">
+              <span class="product-code">SW-205</span>
+              <span class="product-chip">Snacks</span>
+            </div>
+            <h3>Classic Potato Chips</h3>
+            <p>48 x 50g bags · Sea salted</p>
+            <p class="product-price">Case price: $32.00</p>
+          </article>
+
+          <article
+            class="product-card"
+            data-name="Lemon Dish Soap"
+            data-code="SW-310"
+            data-category="household"
+          >
+            <div class="product-header">
+              <span class="product-code">SW-310</span>
+              <span class="product-chip">Household</span>
+            </div>
+            <h3>Lemon Dish Soap</h3>
+            <p>12 x 750ml bottles · Concentrated</p>
+            <p class="product-price">Case price: $27.50</p>
+          </article>
+
+          <article
+            class="product-card"
+            data-name="Iced Tea Mix"
+            data-code="SW-118"
+            data-category="beverages"
+          >
+            <div class="product-header">
+              <span class="product-code">SW-118</span>
+              <span class="product-chip">Beverages</span>
+            </div>
+            <h3>Iced Tea Mix</h3>
+            <p>6 x 1kg tubs · Lemon flavor</p>
+            <p class="product-price">Case price: $21.90</p>
+          </article>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const searchInput = document.getElementById('product-search');
+      const categorySelect = document.getElementById('category-filter');
+      const cards = Array.from(document.querySelectorAll('.product-card'));
+
+      function filterProducts() {
+        const query = searchInput.value.toLowerCase();
+        const category = categorySelect.value;
+
+        cards.forEach((card) => {
+          const name = card.dataset.name.toLowerCase();
+          const code = card.dataset.code.toLowerCase();
+          const cardCategory = card.dataset.category;
+
+          const matchesText = !query || name.includes(query) || code.includes(query);
+          const matchesCategory = !category || cardCategory === category;
+
+          card.style.display = matchesText && matchesCategory ? '' : 'none';
+        });
+      }
+
+      searchInput.addEventListener('input', filterProducts);
+      categorySelect.addEventListener('change', filterProducts);
+    </script>
+  </body>
+  </html>
+

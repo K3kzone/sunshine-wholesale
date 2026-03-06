@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wholesale Login - Sunshine Wholesale</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="auth-body">
+    <main class="auth-wrapper">
+      <div class="auth-card">
+        <a href="/" class="auth-logo">Sunshine Wholesale</a>
+        <h1>Wholesale Login</h1>
+        <p class="auth-subtitle">Authorized customers only. Use your details to access pricing and catalog.</p>
+
+        <form method="POST" action="/login" class="auth-form">
+          <label>
+            Email
+            <input type="email" name="email" required />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" required />
+          </label>
+          <button type="submit" class="button full-width">Login</button>
+        </form>
+
+        <p class="auth-error" id="error-message" hidden>Invalid email or password. Please try again.</p>
+      </div>
+    </main>
+
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('error') === '1') {
+        document.getElementById('error-message').hidden = false;
+      }
+    </script>
+  </body>
+  </html>
+
