@@ -6,59 +6,98 @@
     <title>Sunshine Wholesale</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <header class="site-header">
+  <body class="home-page">
+    <header class="site-header site-header--simple">
       <div class="container header-inner">
-        <div class="logo">Sunshine Wholesale</div>
-        <nav class="nav">
-          <a href="/catalog.html">Catalog</a>
-          <a href="#about">About</a>
-          <a href="#contact">Contact</a>
-          <a href="/login.html" class="button button-outline">Wholesale Login</a>
+        <a href="/" class="logo">Sunshine Wholesale</a>
+        <nav class="nav nav--simple">
+          <a href="/" class="nav-link nav-link--active">Home</a>
+          <a href="/catalog.html" class="nav-link">Products</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#contact" class="nav-link">Contact</a>
+          <a href="/login.html" class="nav-link nav-link--cta">Wholesale Login</a>
         </nav>
       </div>
     </header>
 
     <main>
-      <section class="hero">
-        <div class="container hero-inner">
-          <div>
-            <h1>Wholesale Essentials, Trusted Quality.</h1>
-            <p>
-              Short, clear description of what your business offers and why customers trust you.
-            </p>
-            <div class="hero-actions">
-              <a href="/catalog.html" class="button">View Catalog & Order</a>
-              <a href="#contact" class="text-link">Contact Us</a>
-            </div>
+      <section class="hero-banner">
+        <div class="hero-banner__inner">
+          <div class="hero-banner__content">
+            <h1 class="hero-banner__title">Your Trusted Wholesale Partner</h1>
+            <p class="hero-banner__text">Your one-stop business partner for quality, variety, and reliable service.</p>
+            <a href="/catalog.html" class="hero-banner__cta">View Catalog</a>
           </div>
-          <div class="hero-card">
-            <h2>Business Highlights</h2>
-            <ul>
-              <li>High quality products</li>
-              <li>Fast, reliable service</li>
-              <li>Local, trusted team</li>
-            </ul>
+          <div class="hero-banner__visual">
+            <div class="hero-banner__image-placeholder"></div>
+            <div class="hero-banner__accent"></div>
           </div>
         </div>
       </section>
 
-      <section id="services" class="section">
+      <section class="section section--products">
         <div class="container">
-          <h2>Our Services</h2>
-          <div class="grid">
-            <div class="card">
-              <h3>Service One</h3>
-              <p>Short description of your main service or product line.</p>
+          <header class="section-head">
+            <div>
+              <h2 class="section-head__title">New Arrivals</h2>
+              <p class="section-head__sub">Fresh products just added to our store</p>
             </div>
-            <div class="card">
-              <h3>Service Two</h3>
-              <p>Short description of another important service you provide.</p>
+            <a href="/catalog.html" class="section-head__link">View All &gt;</a>
+          </header>
+          <div class="home-product-row">
+            <a href="/catalog.html" class="home-product-card">
+              <img src="https://picsum.photos/seed/SW101/400/400" alt="Sparkling Orange Soda" class="home-product-card__img" loading="lazy" />
+              <h3 class="home-product-card__name">Sparkling Orange Soda</h3>
+            </a>
+            <a href="/catalog.html" class="home-product-card">
+              <img src="https://picsum.photos/seed/SW111/400/400" alt="Orange Juice" class="home-product-card__img" loading="lazy" />
+              <h3 class="home-product-card__name">Orange Juice</h3>
+            </a>
+            <a href="/catalog.html" class="home-product-card">
+              <img src="https://picsum.photos/seed/SW221/400/400" alt="Gummy Bears" class="home-product-card__img" loading="lazy" />
+              <h3 class="home-product-card__name">Gummy Bears</h3>
+            </a>
+            <a href="/catalog.html" class="home-product-card">
+              <img src="https://picsum.photos/seed/SW211/400/400" alt="Mixed Nuts" class="home-product-card__img" loading="lazy" />
+              <h3 class="home-product-card__name">Mixed Nuts</h3>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section--products section--alt">
+        <div class="container">
+          <header class="section-head">
+            <div>
+              <h2 class="section-head__title">Weekly Promotions</h2>
+              <p class="section-head__sub">Special deals and discounts this week</p>
             </div>
-            <div class="card">
-              <h3>Service Three</h3>
-              <p>Short description of a third key offering.</p>
-            </div>
+            <a href="/catalog.html" class="section-head__link">View All &gt;</a>
+          </header>
+          <div class="home-product-row home-product-row--promo">
+            <a href="/catalog.html" class="home-product-card home-product-card--promo">
+              <img src="https://picsum.photos/seed/SW102/400/400" alt="Cola Classic" class="home-product-card__img" loading="lazy" />
+              <span class="home-product-card__badge">15% OFF</span>
+              <h3 class="home-product-card__name">Cola Classic</h3>
+              <p class="home-product-card__price">$19.00 <span class="home-product-card__unit">Per Case</span></p>
+            </a>
+            <a href="/catalog.html" class="home-product-card home-product-card--promo">
+              <img src="https://picsum.photos/seed/SW112/400/400" alt="Apple Juice" class="home-product-card__img" loading="lazy" />
+              <span class="home-product-card__badge home-product-card__badge--was">WAS $24.00</span>
+              <h3 class="home-product-card__name">Apple Juice</h3>
+              <p class="home-product-card__price">$22.00 <span class="home-product-card__unit">Per Case</span></p>
+            </a>
+            <a href="/catalog.html" class="home-product-card home-product-card--promo">
+              <img src="https://picsum.photos/seed/SW205/400/400" alt="Classic Potato Chips" class="home-product-card__img" loading="lazy" />
+              <span class="home-product-card__badge home-product-card__badge--deal">BUY 3 GET $6 OFF</span>
+              <h3 class="home-product-card__name">Classic Potato Chips</h3>
+              <p class="home-product-card__price">$32.00 <span class="home-product-card__unit">Per Case</span></p>
+            </a>
+            <a href="/catalog.html" class="home-product-card home-product-card--promo">
+              <img src="https://picsum.photos/seed/SW310/400/400" alt="Lemon Dish Soap" class="home-product-card__img" loading="lazy" />
+              <h3 class="home-product-card__name">Lemon Dish Soap</h3>
+              <p class="home-product-card__price">$27.50 <span class="home-product-card__unit">Per Case</span></p>
+            </a>
           </div>
         </div>
       </section>
@@ -88,10 +127,15 @@
           <h2>Contact</h2>
           <div class="two-column">
             <div>
-              <p>Share Sunshine Wholesale’s location, hours, and best way to reach you.</p>
-              <p><strong>Phone:</strong> (000) 000-0000</p>
-              <p><strong>Email:</strong> info@sunshinewholesale.com</p>
-              <p><strong>Address:</strong> 123 Wholesale Avenue, Your City</p>
+              <p><strong>Address</strong><br>11835 Wilcrest Dr, Houston, TX 77031</p>
+              <p><strong>Phone</strong><br><a href="tel:+18323280999">(832) 328-0999</a></p>
+              <p><strong>Email</strong><br>info@sunshinewholesale.com</p>
+              <p><strong>Hours</strong><br>
+                Monday–Wednesday: 7:30 AM–5:30 PM<br>
+                Thursday–Friday: 7:30 AM–5:30 PM<br>
+                Saturday: 7 AM–4 PM<br>
+                Sunday: Closed
+              </p>
             </div>
             <form class="card contact-form">
               <h3>Send a Message</h3>
@@ -126,4 +170,3 @@
     </script>
   </body>
   </html>
-

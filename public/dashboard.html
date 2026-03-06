@@ -36,70 +36,214 @@
               <option value="snacks">Snacks</option>
               <option value="household">Household</option>
             </select>
+            <select id="subcategory-filter" aria-label="Filter by subcategory">
+              <option value="">All subcategories</option>
+            </select>
           </div>
 
           <div id="product-grid" class="product-grid">
-            <article
-              class="product-card"
-              data-name="Sparkling Orange Soda"
-              data-code="SW-101"
-              data-category="beverages"
-            >
+            <article class="product-card" data-name="Sparkling Orange Soda" data-code="SW-101" data-category="beverages" data-subcategory="sodas" data-units-per-case="24" data-case-price="18.50">
+              <img src="https://picsum.photos/seed/SW101/400/400" alt="Sparkling Orange Soda" class="product-card__img" loading="lazy" />
               <div class="product-header">
                 <span class="product-code">SW-101</span>
                 <span class="product-chip">Beverages</span>
+                <span class="product-chip product-chip-sub">Sodas</span>
               </div>
               <h3>Sparkling Orange Soda</h3>
               <p>24 x 330ml cans · Sunshine brand</p>
-              <p class="product-price">Case price: $18.50</p>
+              <p class="product-price">Case $18.50 · $0.77/unit</p>
               <button type="button" class="button button-small add-to-cart">Add to cart</button>
             </article>
-
-            <article
-              class="product-card"
-              data-name="Classic Potato Chips"
-              data-code="SW-205"
-              data-category="snacks"
-            >
+            <article class="product-card" data-name="Cola Classic" data-code="SW-102" data-category="beverages" data-subcategory="sodas" data-units-per-case="24" data-case-price="19.00">
+              <img src="https://picsum.photos/seed/SW102/400/400" alt="Cola Classic" class="product-card__img" loading="lazy" />
               <div class="product-header">
-                <span class="product-code">SW-205</span>
-                <span class="product-chip">Snacks</span>
+                <span class="product-code">SW-102</span>
+                <span class="product-chip">Beverages</span>
+                <span class="product-chip product-chip-sub">Sodas</span>
               </div>
-              <h3>Classic Potato Chips</h3>
-              <p>48 x 50g bags · Sea salted</p>
-              <p class="product-price">Case price: $32.00</p>
+              <h3>Cola Classic</h3>
+              <p>24 x 330ml cans</p>
+              <p class="product-price">Case $19.00 · $0.79/unit</p>
               <button type="button" class="button button-small add-to-cart">Add to cart</button>
             </article>
-
-            <article
-              class="product-card"
-              data-name="Lemon Dish Soap"
-              data-code="SW-310"
-              data-category="household"
-            >
+            <article class="product-card" data-name="Lemon-Lime Soda" data-code="SW-103" data-category="beverages" data-subcategory="sodas" data-units-per-case="24" data-case-price="18.00">
+              <img src="https://picsum.photos/seed/SW103/400/400" alt="Lemon-Lime Soda" class="product-card__img" loading="lazy" />
               <div class="product-header">
-                <span class="product-code">SW-310</span>
-                <span class="product-chip">Household</span>
+                <span class="product-code">SW-103</span>
+                <span class="product-chip">Beverages</span>
+                <span class="product-chip product-chip-sub">Sodas</span>
               </div>
-              <h3>Lemon Dish Soap</h3>
-              <p>12 x 750ml bottles · Concentrated</p>
-              <p class="product-price">Case price: $27.50</p>
+              <h3>Lemon-Lime Soda</h3>
+              <p>24 x 330ml cans</p>
+              <p class="product-price">Case $18.00 · $0.75/unit</p>
               <button type="button" class="button button-small add-to-cart">Add to cart</button>
             </article>
-
-            <article
-              class="product-card"
-              data-name="Iced Tea Mix"
-              data-code="SW-118"
-              data-category="beverages"
-            >
+            <article class="product-card" data-name="Orange Juice" data-code="SW-111" data-category="beverages" data-subcategory="juices" data-units-per-case="12" data-case-price="24.00">
+              <img src="https://picsum.photos/seed/SW111/400/400" alt="Orange Juice" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-111</span>
+                <span class="product-chip">Beverages</span>
+                <span class="product-chip product-chip-sub">Juices</span>
+              </div>
+              <h3>Orange Juice</h3>
+              <p>12 x 1L cartons</p>
+              <p class="product-price">Case $24.00 · $2.00/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Apple Juice" data-code="SW-112" data-category="beverages" data-subcategory="juices" data-units-per-case="12" data-case-price="22.00">
+              <img src="https://picsum.photos/seed/SW112/400/400" alt="Apple Juice" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-112</span>
+                <span class="product-chip">Beverages</span>
+                <span class="product-chip product-chip-sub">Juices</span>
+              </div>
+              <h3>Apple Juice</h3>
+              <p>12 x 1L cartons</p>
+              <p class="product-price">Case $22.00 · $1.83/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Iced Tea Mix" data-code="SW-118" data-category="beverages" data-subcategory="tea-coffee" data-units-per-case="6" data-case-price="21.90">
+              <img src="https://picsum.photos/seed/SW118/400/400" alt="Iced Tea Mix" class="product-card__img" loading="lazy" />
               <div class="product-header">
                 <span class="product-code">SW-118</span>
                 <span class="product-chip">Beverages</span>
+                <span class="product-chip product-chip-sub">Tea & Coffee</span>
               </div>
               <h3>Iced Tea Mix</h3>
               <p>6 x 1kg tubs · Lemon flavor</p>
-              <p class="product-price">Case price: $21.90</p>
+              <p class="product-price">Case $21.90 · $3.65/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Coffee Pods" data-code="SW-119" data-category="beverages" data-subcategory="tea-coffee" data-units-per-case="24" data-case-price="28.00">
+              <img src="https://picsum.photos/seed/SW119/400/400" alt="Coffee Pods" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-119</span>
+                <span class="product-chip">Beverages</span>
+                <span class="product-chip product-chip-sub">Tea & Coffee</span>
+              </div>
+              <h3>Coffee Pods</h3>
+              <p>24 pods · Medium roast</p>
+              <p class="product-price">Case $28.00 · $1.17/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Classic Potato Chips" data-code="SW-205" data-category="snacks" data-subcategory="chips" data-units-per-case="48" data-case-price="32.00">
+              <img src="https://picsum.photos/seed/SW205/400/400" alt="Classic Potato Chips" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-205</span>
+                <span class="product-chip">Snacks</span>
+                <span class="product-chip product-chip-sub">Chips</span>
+              </div>
+              <h3>Classic Potato Chips</h3>
+              <p>48 x 50g bags · Sea salted</p>
+              <p class="product-price">Case $32.00 · $0.67/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Corn Chips" data-code="SW-206" data-category="snacks" data-subcategory="chips" data-units-per-case="36" data-case-price="27.00">
+              <img src="https://picsum.photos/seed/SW206/400/400" alt="Corn Chips" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-206</span>
+                <span class="product-chip">Snacks</span>
+                <span class="product-chip product-chip-sub">Chips</span>
+              </div>
+              <h3>Corn Chips</h3>
+              <p>36 x 50g bags · Nacho</p>
+              <p class="product-price">Case $27.00 · $0.75/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Mixed Nuts" data-code="SW-211" data-category="snacks" data-subcategory="nuts" data-units-per-case="24" data-case-price="36.00">
+              <img src="https://picsum.photos/seed/SW211/400/400" alt="Mixed Nuts" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-211</span>
+                <span class="product-chip">Snacks</span>
+                <span class="product-chip product-chip-sub">Nuts</span>
+              </div>
+              <h3>Mixed Nuts</h3>
+              <p>24 x 100g bags · Salted</p>
+              <p class="product-price">Case $36.00 · $1.50/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Peanuts" data-code="SW-212" data-category="snacks" data-subcategory="nuts" data-units-per-case="24" data-case-price="20.00">
+              <img src="https://picsum.photos/seed/SW212/400/400" alt="Peanuts" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-212</span>
+                <span class="product-chip">Snacks</span>
+                <span class="product-chip product-chip-sub">Nuts</span>
+              </div>
+              <h3>Peanuts</h3>
+              <p>24 x 100g bags · Roasted</p>
+              <p class="product-price">Case $20.00 · $0.83/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Gummy Bears" data-code="SW-221" data-category="snacks" data-subcategory="candy" data-units-per-case="24" data-case-price="18.00">
+              <img src="https://picsum.photos/seed/SW221/400/400" alt="Gummy Bears" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-221</span>
+                <span class="product-chip">Snacks</span>
+                <span class="product-chip product-chip-sub">Candy</span>
+              </div>
+              <h3>Gummy Bears</h3>
+              <p>24 x 85g bags</p>
+              <p class="product-price">Case $18.00 · $0.75/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Chocolate Bars" data-code="SW-222" data-category="snacks" data-subcategory="candy" data-units-per-case="36" data-case-price="28.00">
+              <img src="https://picsum.photos/seed/SW222/400/400" alt="Chocolate Bars" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-222</span>
+                <span class="product-chip">Snacks</span>
+                <span class="product-chip product-chip-sub">Candy</span>
+              </div>
+              <h3>Chocolate Bars</h3>
+              <p>36 x 45g · Milk chocolate</p>
+              <p class="product-price">Case $28.00 · $0.78/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Lemon Dish Soap" data-code="SW-310" data-category="household" data-subcategory="cleaning" data-units-per-case="12" data-case-price="27.50">
+              <img src="https://picsum.photos/seed/SW310/400/400" alt="Lemon Dish Soap" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-310</span>
+                <span class="product-chip">Household</span>
+                <span class="product-chip product-chip-sub">Cleaning</span>
+              </div>
+              <h3>Lemon Dish Soap</h3>
+              <p>12 x 750ml bottles · Concentrated</p>
+              <p class="product-price">Case $27.50 · $2.29/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="All-Purpose Cleaner" data-code="SW-311" data-category="household" data-subcategory="cleaning" data-units-per-case="12" data-case-price="22.00">
+              <img src="https://picsum.photos/seed/SW311/400/400" alt="All-Purpose Cleaner" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-311</span>
+                <span class="product-chip">Household</span>
+                <span class="product-chip product-chip-sub">Cleaning</span>
+              </div>
+              <h3>All-Purpose Cleaner</h3>
+              <p>12 x 500ml spray bottles</p>
+              <p class="product-price">Case $22.00 · $1.83/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Paper Towels" data-code="SW-320" data-category="household" data-subcategory="paper" data-units-per-case="8" data-case-price="24.00">
+              <img src="https://picsum.photos/seed/SW320/400/400" alt="Paper Towels" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-320</span>
+                <span class="product-chip">Household</span>
+                <span class="product-chip product-chip-sub">Paper</span>
+              </div>
+              <h3>Paper Towels</h3>
+              <p>8 rolls · 2-ply</p>
+              <p class="product-price">Case $24.00 · $3.00/unit</p>
+              <button type="button" class="button button-small add-to-cart">Add to cart</button>
+            </article>
+            <article class="product-card" data-name="Napkins" data-code="SW-321" data-category="household" data-subcategory="paper" data-units-per-case="12" data-case-price="15.00">
+              <img src="https://picsum.photos/seed/SW321/400/400" alt="Napkins" class="product-card__img" loading="lazy" />
+              <div class="product-header">
+                <span class="product-code">SW-321</span>
+                <span class="product-chip">Household</span>
+                <span class="product-chip product-chip-sub">Paper</span>
+              </div>
+              <h3>Napkins</h3>
+              <p>12 x 250 count</p>
+              <p class="product-price">Case $15.00 · $1.25/unit</p>
               <button type="button" class="button button-small add-to-cart">Add to cart</button>
             </article>
           </div>
@@ -150,8 +294,26 @@
     <script>
       const searchInput = document.getElementById('product-search');
       const categorySelect = document.getElementById('category-filter');
+      const subcategorySelect = document.getElementById('subcategory-filter');
       const cards = Array.from(document.querySelectorAll('.product-card'));
       const cartItemsEl = document.getElementById('cart-items');
+
+      const subcategoriesByCategory = { beverages: ['sodas', 'juices', 'tea-coffee'], snacks: ['chips', 'nuts', 'candy'], household: ['cleaning', 'paper'] };
+      const subcategoryLabels = { sodas: 'Sodas', juices: 'Juices', 'tea-coffee': 'Tea & Coffee', chips: 'Chips', nuts: 'Nuts', candy: 'Candy', cleaning: 'Cleaning', paper: 'Paper' };
+
+      function updateSubcategoryFilter() {
+        const main = categorySelect.value;
+        subcategorySelect.innerHTML = '<option value="">All subcategories</option>';
+        if (main && subcategoriesByCategory[main]) {
+          subcategoriesByCategory[main].forEach((sub) => {
+            const opt = document.createElement('option');
+            opt.value = sub;
+            opt.textContent = subcategoryLabels[sub];
+            subcategorySelect.appendChild(opt);
+          });
+        }
+        filterProducts();
+      }
       const cartEmptyEl = document.getElementById('cart-empty');
       const cartTotalEl = document.getElementById('cart-total');
       const checkoutForm = document.getElementById('checkout-form');
@@ -162,16 +324,19 @@
       function filterProducts() {
         const query = searchInput.value.toLowerCase();
         const category = categorySelect.value;
+        const subcategory = subcategorySelect.value;
 
         cards.forEach((card) => {
           const name = card.dataset.name.toLowerCase();
           const code = card.dataset.code.toLowerCase();
           const cardCategory = card.dataset.category;
+          const cardSub = card.dataset.subcategory || '';
 
           const matchesText = !query || name.includes(query) || code.includes(query);
           const matchesCategory = !category || cardCategory === category;
+          const matchesSub = !subcategory || cardSub === subcategory;
 
-          card.style.display = matchesText && matchesCategory ? '' : 'none';
+          card.style.display = matchesText && matchesCategory && matchesSub ? '' : 'none';
         });
       }
 
@@ -248,7 +413,8 @@
       }
 
       searchInput.addEventListener('input', filterProducts);
-      categorySelect.addEventListener('change', filterProducts);
+      categorySelect.addEventListener('change', updateSubcategoryFilter);
+      subcategorySelect.addEventListener('change', filterProducts);
       document.querySelectorAll('.add-to-cart').forEach((btn) => {
         btn.addEventListener('click', () => addToCart(btn.closest('.product-card')));
       });
@@ -316,6 +482,7 @@
         }
       });
 
+      updateSubcategoryFilter();
       renderCart();
     </script>
   </body>

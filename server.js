@@ -2,6 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const path = require('path');
 const nodemailer = require('nodemailer');
+const { Resend } = require('resend');
 const PDFDocument = require('pdfkit');
 require('dotenv').config();
 
@@ -12,7 +13,17 @@ const PORT = process.env.PORT || 3000;
 const ADMIN_EMAIL = process.env.ADMIN_EMAIL || 'admin@example.com';
 const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'password123';
 
-function buildOrderPdf({ orderTime, customerName, businessName, email, phone, items, notes }) {
+function formatOrderTime(isoDateStr) {
+  const d = new Date(isoDateStr);
+  return d.toLocaleString('en-US', {
+    timeZone: 'America/Chicago',
+    dateStyle: 'long',
+    timeStyle: 'short',
+    hour12: true,
+  });
+}
+
+function buildOrderPdf({ orderTimeFormatted, customerName, businessName, email, phone, items, notes }) {
   return new Promise((resolve, reject) => {
     const doc = new PDFDocument({ margin: 50 });
     const chunks = [];
@@ -23,7 +34,7 @@ function buildOrderPdf({ orderTime, customerName, businessName, email, phone, it
 
     doc.fontSize(20).text('Sunshine Wholesale - Order', { align: 'left' });
     doc.moveDown(0.5);
-    doc.fontSize(10).fillColor('#555').text(`Order placed at (UTC): ${orderTime}`);
+    doc.fontSize(10).fillColor('#555').text(`Order placed: ${orderTimeFormatted}`);
     doc.moveDown(1);
 
     doc.fillColor('#000').fontSize(12).text('Customer', { underline: true });
@@ -111,11 +122,12 @@ app.post('/api/order', async (req, res) => {
   const businessName = customer?.businessName || '';
   const email = customer?.email || sessionUser.email || '';
   const phone = customer?.phone || '';
-  const orderTime = new Date().toISOString();
+  const orderTimeIso = new Date().toISOString();
+  const orderTimeFormatted = formatOrderTime(orderTimeIso);
 
   const lines = [
     'New wholesale order request:',
-    `Order placed at (UTC): ${orderTime}`,
+    `Order placed: ${orderTimeFormatted}`,
     '',
     `Customer name: ${customerName}`,
     `Business name: ${businessName}`,
@@ -136,7 +148,7 @@ app.post('/api/order', async (req, res) => {
 
   try {
     pdfBuffer = await buildOrderPdf({
-      orderTime,
+      orderTimeFormatted,
       customerName,
       businessName,
       email,
@@ -148,12 +160,57 @@ app.post('/api/order', async (req, res) => {
     console.error('Failed to generate order PDF', e);
   }
 
+  const confirmationLines = [
+    'Thank you for your order with Sunshine Wholesale!',
+    '',
+    `We received your order on ${orderTimeFormatted}.`,
+    '',
+    'Order summary:',
+    ...items.map(
+      (item, index) =>
+        `${index + 1}. ${item.code || ''} - ${item.name || ''} x ${item.quantity || 1}`
+    ),
+    '',
+    'We will prepare your order and contact you if we have any questions.',
+    '',
+    '— Sunshine Wholesale',
+    '11835 Wilcrest Dr, Houston, TX 77031',
+    '(832) 328-0999',
+  ];
+  const confirmationBody = confirmationLines.join('\n');
+
   try {
-    if (
+    const toEmail = process.env.WHOLESALE_EMAIL;
+    const subject = `New wholesale order - ${businessName || customerName || 'Sunshine Wholesale'}`;
+
+    // Resend (works on Render free tier – no SMTP ports needed)
+    if (process.env.RESEND_API_KEY && toEmail) {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      const from = process.env.RESEND_FROM || 'Sunshine Wholesale <onboarding@resend.dev>';
+      await resend.emails.send({
+        from,
+        to: [toEmail],
+        subject,
+        text: textBody,
+        attachments: pdfBuffer
+          ? [{ filename: `order-${orderTimeIso.replace(/[:.]/g, '-')}.pdf`, content: pdfBuffer }]
+          : undefined,
+      });
+      if (email && email !== toEmail) {
+        await resend.emails.send({
+          from,
+          to: [email],
+          subject: 'Order received – Sunshine Wholesale',
+          text: confirmationBody,
+        });
+      }
+    }
+    // Gmail SMTP (works locally or on paid Render)
+    else if (
       process.env.SMTP_HOST &&
       process.env.SMTP_USER &&
       process.env.SMTP_PASS &&
-      process.env.WHOLESALE_EMAIL
+      toEmail
     ) {
       const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
@@ -164,21 +221,23 @@ app.post('/api/order', async (req, res) => {
           pass: process.env.SMTP_PASS,
         },
       });
-
       await transporter.sendMail({
         from: process.env.SMTP_FROM || process.env.SMTP_USER,
-        to: process.env.WHOLESALE_EMAIL,
-        subject: `New wholesale order - ${businessName || customerName || 'Sunshine Wholesale'}`,
+        to: toEmail,
+        subject,
         text: textBody,
         attachments: pdfBuffer
-          ? [
-              {
-                filename: `order-${orderTime}.pdf`,
-                content: pdfBuffer,
-              },
-            ]
+          ? [{ filename: `order-${orderTimeIso.replace(/[:.]/g, '-')}.pdf`, content: pdfBuffer }]
           : [],
       });
+      if (email) {
+        await transporter.sendMail({
+          from: process.env.SMTP_FROM || process.env.SMTP_USER,
+          to: email,
+          subject: 'Order received – Sunshine Wholesale',
+          text: confirmationBody,
+        });
+      }
     } else {
       console.log('New wholesale order (email not configured):\n', textBody);
     }
